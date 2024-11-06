@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&family=Sarabun:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #2196F3;
+    --secondary-color: #1976D2;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Prompt', 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+#queueDisplay {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 10px;
+    transition: background-color 0.3s;
+    width: 90%;
+    max-width: 300px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#nextCustomer {
+    background-color: #4CAF50;
+}
+
+#nextCustomer:hover {
+    background-color: #388E3C;
+}
+
+#resetQueue {
+    background-color: #f44336;
+}
+
+#resetQueue:hover {
+    background-color: #d32f2f;
+}
+
+.queue-display-large {
+    font-size: 3rem;
+    padding: 40px;
+    margin: 20px auto;
+    width: 95%;
+    max-width: 800px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.queue-display-large .number {
+    font-size: 5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.queue-display-large .waiting {
+    font-size: 2rem;
+    color: #666;
+    margin: 15px 0;
+}
+
+.error-message {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.error-message.show {
+    opacity: 1;
+}
+
+.number {
+    transition: all 0.3s ease-in-out;
+}
+
+.number.changed {
+    transform: scale(1.2);
+    color: #4CAF50;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    #queueDisplay {
+        font-size: 1.2rem;
+        padding: 15px;
+    }
+    
+    button {
+        padding: 12px 24px;
+        font-size: 1.1rem;
+    }
+    
+    .queue-display-large {
+        font-size: 2rem;
+        padding: 20px;
+    }
+    
+    .queue-display-large .number {
+        font-size: 3.5rem;
+    }
+    
+    .queue-display-large .waiting {
+        font-size: 1.5rem;
+    }
+}

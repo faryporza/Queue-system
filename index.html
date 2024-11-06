@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>ระบบคิว</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+</head>
+<body>
+    <h1>สถานะคิว</h1>
+    <div id="queueDisplay" class="queue-display-large"></div>
+    <div id="errorMessage" style="color: red; text-align: center; margin: 10px 0;"></div>
+
+    <script>
+        const socket = io('http://localhost:3000');
+        const audio = new Audio('notification.mp3');
+        
+        socket.on('updateQueue', (data) => {
+            const queueDisplay = document.getElementById('queueDisplay');
+            const oldNumber = queueDisplay.dataset.currentNumber || data.currentNumber;
+            queueDisplay.dataset.currentNumber = data.currentNumber;
+            
+            queueDisplay.innerHTML = `
+                <div>กำลังเรียกคิวที่</div>
+                <div class="number">${data.currentNumber}</div>
+                <div class="waiting">คิวที่รอ: ${data.queueLength}</div>
+            `;
+            
+            if (oldNumber !== data.currentNumber) {
+                const numberElement = queueDisplay.querySelector('.number');
+                numberElement.classList.add('changed');
+                audio.play();
+                setTimeout(() => {
+                    numberElement.classList.remove('changed');
+                }, 1000);
+            }
+        });
+
+        socket.on('error', (data) => {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.classList.add('error-message');
+            errorDiv.textContent = data.message;
+            errorDiv.classList.add('show');
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
